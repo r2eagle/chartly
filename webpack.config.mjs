@@ -14,7 +14,7 @@ export default (env, argv) => {
       filename: isProduction ? "[name].[contenthash].js" : "bundle.js",
       path: path.resolve(dirname, "public"),
       clean: {
-        keep: /^(webflow\.json|styles\.css|chartflow-runtime\.js)$/,
+        keep: /^(webflow\.json|styles\.css|chartflow-runtime\.js|__webflow)$/,
       },
     },
     resolve: {
