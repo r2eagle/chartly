@@ -6,10 +6,12 @@ import { StyleEditor } from './StyleEditor';
 import { PreviewPanel } from './PreviewPanel';
 import { useChartConfig } from '../hooks/useChartConfig';
 import { useWebflow } from '../hooks/useWebflow';
+import { useWebflowContext } from '../context/WebflowContext';
 
 export const App: React.FC = () => {
   const chartConfig = useChartConfig();
   const { insertChart } = useWebflow();
+  const { isStandaloneMode } = useWebflowContext();
 
   const handleInsertChart = async () => {
     try {
@@ -23,7 +25,14 @@ export const App: React.FC = () => {
     <div className="flex flex-col h-screen bg-wf-bg-primary">
       {/* Header - Webflow Dark Theme */}
       <div className="bg-wf-bg-secondary border-b border-wf-border px-wf-2 py-wf-2">
-        <h1 className="text-wf-base font-semibold text-wf-text-primary">ChartFlow</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-wf-base font-semibold text-wf-text-primary">ChartFlow</h1>
+          {isStandaloneMode && (
+            <span className="text-wf-xs text-wf-text-secondary bg-wf-bg-primary px-2 py-1 rounded">
+              Demo Mode - Install in Webflow Designer to use
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Two-Column Layout */}
@@ -110,7 +119,7 @@ export const App: React.FC = () => {
           onClick={handleInsertChart}
           className="flex-1 wf-btn wf-btn-primary"
         >
-          Insert Chart
+          {isStandaloneMode ? 'Preview Chart Config' : 'Insert Chart'}
         </button>
       </div>
     </div>

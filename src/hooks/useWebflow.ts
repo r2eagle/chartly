@@ -1,12 +1,20 @@
 import { useCallback } from 'react';
 import { ChartConfig } from '../types/chart.types';
 import { CHART_JS_CDN_URL } from '../constants/scripts';
+import { useWebflowContext } from '../context/WebflowContext';
 
 export const useWebflow = () => {
+  const { isWebflowEnvironment } = useWebflowContext();
 
   const insertChart = useCallback(async (config: ChartConfig) => {
     try {
       console.log('Inserting chart with config:', config);
+
+      // In standalone mode, just log the config
+      if (!isWebflowEnvironment) {
+        console.log('Standalone mode: Chart would be inserted with config:', config);
+        return true;
+      }
 
       // Generate unique ID for this chart instance
       const chartId = `chart-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -49,17 +57,25 @@ export const useWebflow = () => {
         }
       } else {
         // If no element selected, notify user to select an element
-        await webflow.notify({
-          type: 'Error',
-          message: 'Please select an element on the page where you want to insert the chart.'
-        });
+        if (isWebflowEnvironment) {
+          await webflow.notify({
+            type: 'Error',
+            message: 'Please select an element on the page where you want to insert the chart.'
+          });
+        } else {
+          console.error('Please select an element on the page where you want to insert the chart.');
+        }
         return false;
       }
 
-      await webflow.notify({
-        type: 'Success',
-        message: 'Chart inserted! Add scripts to Page Settings to see it on published site.'
-      });
+      if (isWebflowEnvironment) {
+        await webflow.notify({
+          type: 'Success',
+          message: 'Chart inserted! Add scripts to Page Settings to see it on published site.'
+        });
+      } else {
+        console.log('Chart inserted successfully!');
+      }
 
       // Log manual setup instructions
       console.log('%c✅ Chart Inserted Successfully!', 'font-size: 16px; font-weight: bold; color: #10b981;');
@@ -98,22 +114,28 @@ export const useWebflow = () => {
       return true;
     } catch (error) {
       console.error('Error inserting chart:', error);
-      await webflow.notify({
-        type: 'Error',
-        message: `Failed to insert chart: ${error instanceof Error ? error.message : 'Unknown error'}`
-      });
+      if (isWebflowEnvironment) {
+        await webflow.notify({
+          type: 'Error',
+          message: `Failed to insert chart: ${error instanceof Error ? error.message : 'Unknown error'}`
+        });
+      }
       throw error;
     }
-  }, []);
+  }, [isWebflowEnvironment]);
 
   const getSelectedElement = useCallback(async () => {
     try {
+      if (!isWebflowEnvironment) {
+        console.log('Standalone mode: No element selection available');
+        return null;
+      }
       return await webflow.getSelectedElement();
     } catch (error) {
       console.error('Error getting selected element:', error);
       return null;
     }
-  }, []);
+  }, [isWebflowEnvironment]);
 
   return {
     insertChart,
