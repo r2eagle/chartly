@@ -1,0 +1,64 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.0, v1.0.1, etc.
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write  # Required for npm provenance
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build runtime
+        run: npm run build-runtime
+
+      - name: Verify dist files exist
+        run: |
+          if [ ! -f "dist/runtime.min.js" ]; then
+            echo "❌ Error: dist/runtime.min.js not found"
+            exit 1
+          fi
+          echo "✅ Dist files verified"
+          ls -lh dist/
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## ChartFlow Runtime ${{ github.ref }}
+
+            ### CDN URL
+            ```html
+            <script src="https://cdn.jsdelivr.net/npm/@r2eagle/chartflow@${{ github.ref_name }}/dist/runtime.min.js"></script>
+            ```
+
+            ### Changes
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false

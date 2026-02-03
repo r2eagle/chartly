@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "public",
+    "target": "es6",
+    "lib": ["es6", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types", "./node_modules/@webflow"],
+    "jsx": "react",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "react": ["node_modules/react"],
+      "react-dom": ["node_modules/react-dom"],
+      "chart.js": ["node_modules/chart.js"],
+      "react-chartjs-2": ["node_modules/react-chartjs-2"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
+}
