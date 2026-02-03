@@ -1,0 +1,33 @@
+/* ColorPickerPopover styles */
+.color-picker-container {
+  width: 200px;
+}
+
+/* Style react-colorful to match Webflow theme */
+.color-picker-container .react-colorful {
+  width: 100%;
+  height: 150px;
+}
+
+.color-picker-container .react-colorful__saturation {
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+}
+
+.color-picker-container .react-colorful__hue {
+  height: 12px;
+  border-radius: 0 0 4px 4px;
+  margin-top: 8px;
+}
+
+.color-picker-container .react-colorful__pointer {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.color-picker-container .react-colorful__saturation-pointer {
+  width: 20px;
+  height: 20px;
+}

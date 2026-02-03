@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChartConfig, ChartOptions } from '../types/chart.types';
 import { COLOR_PALETTES, applyColorPalette } from '../utils/colorPalettes';
+import { ColorPickerPopover } from './ColorPickerPopover';
 
 interface Props {
   config: ChartConfig;
@@ -239,33 +240,21 @@ export const StyleEditor: React.FC<Props> = ({
             <div>
               <span className="text-wf-xs text-wf-text-secondary">X-Axis</span>
               <div className="grid grid-cols-3 gap-1.5 mt-1">
-                <div>
-                  <label className="text-wf-xs text-wf-text-primary">Border</label>
-                  <input
-                    type="color"
-                    value={config.options.scales?.x?.grid?.borderColor || '#666666'}
-                    onChange={(e) => handleAxisColorChange('x', 'border', e.target.value)}
-                    className="wf-color-input w-full h-8"
-                  />
-                </div>
-                <div>
-                  <label className="text-wf-xs text-wf-text-primary">Grid</label>
-                  <input
-                    type="color"
-                    value={config.options.scales?.x?.grid?.color || '#cccccc'}
-                    onChange={(e) => handleAxisColorChange('x', 'grid', e.target.value)}
-                    className="wf-color-input w-full h-8"
-                  />
-                </div>
-                <div>
-                  <label className="text-wf-xs text-wf-text-primary">Labels</label>
-                  <input
-                    type="color"
-                    value={config.options.scales?.x?.ticks?.color || '#666666'}
-                    onChange={(e) => handleAxisColorChange('x', 'labels', e.target.value)}
-                    className="wf-color-input w-full h-8"
-                  />
-                </div>
+                <ColorPickerPopover
+                  label="Border"
+                  color={config.options.scales?.x?.grid?.borderColor || '#666666'}
+                  onChange={(color) => handleAxisColorChange('x', 'border', color)}
+                />
+                <ColorPickerPopover
+                  label="Grid"
+                  color={config.options.scales?.x?.grid?.color || '#cccccc'}
+                  onChange={(color) => handleAxisColorChange('x', 'grid', color)}
+                />
+                <ColorPickerPopover
+                  label="Labels"
+                  color={config.options.scales?.x?.ticks?.color || '#666666'}
+                  onChange={(color) => handleAxisColorChange('x', 'labels', color)}
+                />
               </div>
             </div>
 
@@ -273,33 +262,21 @@ export const StyleEditor: React.FC<Props> = ({
             <div>
               <span className="text-wf-xs text-wf-text-secondary">Y-Axis</span>
               <div className="grid grid-cols-3 gap-1.5 mt-1">
-                <div>
-                  <label className="text-wf-xs text-wf-text-primary">Border</label>
-                  <input
-                    type="color"
-                    value={config.options.scales?.y?.grid?.borderColor || '#666666'}
-                    onChange={(e) => handleAxisColorChange('y', 'border', e.target.value)}
-                    className="wf-color-input w-full h-8"
-                  />
-                </div>
-                <div>
-                  <label className="text-wf-xs text-wf-text-primary">Grid</label>
-                  <input
-                    type="color"
-                    value={config.options.scales?.y?.grid?.color || '#cccccc'}
-                    onChange={(e) => handleAxisColorChange('y', 'grid', e.target.value)}
-                    className="wf-color-input w-full h-8"
-                  />
-                </div>
-                <div>
-                  <label className="text-wf-xs text-wf-text-primary">Labels</label>
-                  <input
-                    type="color"
-                    value={config.options.scales?.y?.ticks?.color || '#666666'}
-                    onChange={(e) => handleAxisColorChange('y', 'labels', e.target.value)}
-                    className="wf-color-input w-full h-8"
-                  />
-                </div>
+                <ColorPickerPopover
+                  label="Border"
+                  color={config.options.scales?.y?.grid?.borderColor || '#666666'}
+                  onChange={(color) => handleAxisColorChange('y', 'border', color)}
+                />
+                <ColorPickerPopover
+                  label="Grid"
+                  color={config.options.scales?.y?.grid?.color || '#cccccc'}
+                  onChange={(color) => handleAxisColorChange('y', 'grid', color)}
+                />
+                <ColorPickerPopover
+                  label="Labels"
+                  color={config.options.scales?.y?.ticks?.color || '#666666'}
+                  onChange={(color) => handleAxisColorChange('y', 'labels', color)}
+                />
               </div>
             </div>
           </div>
