@@ -12,7 +12,6 @@ interface Props {
 
 export const DataEditor: React.FC<Props> = ({
   data,
-  chartType,
   onDataChange,
   onAddDataPoint,
   onRemoveDataPoint

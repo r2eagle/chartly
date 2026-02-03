@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { ChartConfig } from '../types/chart.types';
-import { CHART_JS_CDN_URL, CHARTFLOW_RUNTIME_SCRIPT } from '../constants/scripts';
+import { CHART_JS_CDN_URL } from '../constants/scripts';
 
 export const useWebflow = () => {
 
