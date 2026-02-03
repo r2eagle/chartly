@@ -29,7 +29,7 @@ declare global {
 
   interface Webflow {
     // Extension API
-    setExtensionSize(size: 'small' | 'default' | 'large'): void;
+    setExtensionSize(size: 'small' | 'default' | 'large'): Promise<null>;
     notify(notification: WebflowNotification): Promise<void>;
 
     // Element API
