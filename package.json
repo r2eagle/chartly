@@ -1,6 +1,6 @@
 {
   "name": "@r2eagle/chartflow",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Runtime library for ChartFlow - Create beautiful Chart.js charts in Webflow Designer",
   "main": "dist/runtime.min.js",
   "types": "dist/runtime.d.ts",
