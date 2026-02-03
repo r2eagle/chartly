@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm install && npm run build-webpack && cp webflow.json public/",
+  "buildCommand": "npm install && cp webflow.json public/ && npm run build-webpack",
   "outputDirectory": "public",
   "headers": [
     {

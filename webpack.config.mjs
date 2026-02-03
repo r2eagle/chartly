@@ -13,7 +13,9 @@ export default (env, argv) => {
     output: {
       filename: isProduction ? "[name].[contenthash].js" : "bundle.js",
       path: path.resolve(dirname, "public"),
-      clean: true,
+      clean: {
+        keep: /^(webflow\.json|styles\.css|chartflow-runtime\.js)$/,
+      },
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".json"],
