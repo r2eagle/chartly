@@ -68,7 +68,7 @@ export const StyleEditor: React.FC<Props> = ({
     });
   };
 
-  const handleAxisColorChange = (axis: 'x' | 'y', colorType: 'border' | 'labels', color: string) => {
+  const handleAxisColorChange = (axis: 'x' | 'y', colorType: 'border' | 'grid' | 'labels', color: string) => {
     if (colorType === 'border') {
       onOptionsChange({
         scales: {
@@ -79,6 +79,19 @@ export const StyleEditor: React.FC<Props> = ({
               ...config.options.scales?.[axis]?.grid,
               borderColor: color,
               tickColor: color
+            }
+          }
+        }
+      });
+    } else if (colorType === 'grid') {
+      onOptionsChange({
+        scales: {
+          ...config.options.scales,
+          [axis]: {
+            ...config.options.scales?.[axis],
+            grid: {
+              ...config.options.scales?.[axis]?.grid,
+              color: color
             }
           }
         }
@@ -225,13 +238,22 @@ export const StyleEditor: React.FC<Props> = ({
             {/* X-axis colors */}
             <div>
               <span className="text-wf-xs text-wf-text-secondary">X-Axis</span>
-              <div className="grid grid-cols-2 gap-1.5 mt-1">
+              <div className="grid grid-cols-3 gap-1.5 mt-1">
                 <div>
-                  <label className="text-wf-xs text-wf-text-primary">Line</label>
+                  <label className="text-wf-xs text-wf-text-primary">Border</label>
                   <input
                     type="color"
                     value={config.options.scales?.x?.grid?.borderColor || '#666666'}
                     onChange={(e) => handleAxisColorChange('x', 'border', e.target.value)}
+                    className="wf-color-input w-full h-8"
+                  />
+                </div>
+                <div>
+                  <label className="text-wf-xs text-wf-text-primary">Grid</label>
+                  <input
+                    type="color"
+                    value={config.options.scales?.x?.grid?.color || '#cccccc'}
+                    onChange={(e) => handleAxisColorChange('x', 'grid', e.target.value)}
                     className="wf-color-input w-full h-8"
                   />
                 </div>
@@ -250,13 +272,22 @@ export const StyleEditor: React.FC<Props> = ({
             {/* Y-axis colors */}
             <div>
               <span className="text-wf-xs text-wf-text-secondary">Y-Axis</span>
-              <div className="grid grid-cols-2 gap-1.5 mt-1">
+              <div className="grid grid-cols-3 gap-1.5 mt-1">
                 <div>
-                  <label className="text-wf-xs text-wf-text-primary">Line</label>
+                  <label className="text-wf-xs text-wf-text-primary">Border</label>
                   <input
                     type="color"
                     value={config.options.scales?.y?.grid?.borderColor || '#666666'}
                     onChange={(e) => handleAxisColorChange('y', 'border', e.target.value)}
+                    className="wf-color-input w-full h-8"
+                  />
+                </div>
+                <div>
+                  <label className="text-wf-xs text-wf-text-primary">Grid</label>
+                  <input
+                    type="color"
+                    value={config.options.scales?.y?.grid?.color || '#cccccc'}
+                    onChange={(e) => handleAxisColorChange('y', 'grid', e.target.value)}
                     className="wf-color-input w-full h-8"
                   />
                 </div>
