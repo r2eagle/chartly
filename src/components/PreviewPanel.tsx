@@ -10,7 +10,11 @@ import {
   ArcElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarController,
+  LineController,
+  PieController,
+  DoughnutController
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import { ChartConfig } from '../types/chart.types';
@@ -25,7 +29,11 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarController,
+  LineController,
+  PieController,
+  DoughnutController
 );
 
 interface Props {
