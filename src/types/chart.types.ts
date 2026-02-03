@@ -57,12 +57,24 @@ export interface ScaleOptions {
     display?: boolean;
     grid?: {
       display?: boolean;
+      color?: string;
+      borderColor?: string;
+      tickColor?: string;
+    };
+    ticks?: {
+      color?: string;
     };
   };
   y?: {
     display?: boolean;
     grid?: {
       display?: boolean;
+      color?: string;
+      borderColor?: string;
+      tickColor?: string;
+    };
+    ticks?: {
+      color?: string;
     };
     beginAtZero?: boolean;
   };

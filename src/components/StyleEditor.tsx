@@ -68,6 +68,37 @@ export const StyleEditor: React.FC<Props> = ({
     });
   };
 
+  const handleAxisColorChange = (axis: 'x' | 'y', colorType: 'border' | 'labels', color: string) => {
+    if (colorType === 'border') {
+      onOptionsChange({
+        scales: {
+          ...config.options.scales,
+          [axis]: {
+            ...config.options.scales?.[axis],
+            grid: {
+              ...config.options.scales?.[axis]?.grid,
+              borderColor: color,
+              tickColor: color
+            }
+          }
+        }
+      });
+    } else {
+      onOptionsChange({
+        scales: {
+          ...config.options.scales,
+          [axis]: {
+            ...config.options.scales?.[axis],
+            ticks: {
+              ...config.options.scales?.[axis]?.ticks,
+              color: color
+            }
+          }
+        }
+      });
+    }
+  };
+
   return (
     <div className="space-y-wf-3">
       <div>
@@ -180,6 +211,66 @@ export const StyleEditor: React.FC<Props> = ({
               />
               <span className="text-wf-sm text-wf-text-primary">Y-axis</span>
             </label>
+          </div>
+        </div>
+      )}
+
+      {/* Axis Colors (for bar and line charts) - Compact */}
+      {(config.type === 'bar' || config.type === 'line') && (
+        <div>
+          <label className="block text-wf-sm font-semibold text-wf-text-primary mb-wf-1">
+            Axis Colors
+          </label>
+          <div className="space-y-2">
+            {/* X-axis colors */}
+            <div>
+              <span className="text-wf-xs text-wf-text-secondary">X-Axis</span>
+              <div className="grid grid-cols-2 gap-1.5 mt-1">
+                <div>
+                  <label className="text-wf-xs text-wf-text-primary">Line</label>
+                  <input
+                    type="color"
+                    value={config.options.scales?.x?.grid?.borderColor || '#666666'}
+                    onChange={(e) => handleAxisColorChange('x', 'border', e.target.value)}
+                    className="wf-color-input w-full h-8"
+                  />
+                </div>
+                <div>
+                  <label className="text-wf-xs text-wf-text-primary">Labels</label>
+                  <input
+                    type="color"
+                    value={config.options.scales?.x?.ticks?.color || '#666666'}
+                    onChange={(e) => handleAxisColorChange('x', 'labels', e.target.value)}
+                    className="wf-color-input w-full h-8"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Y-axis colors */}
+            <div>
+              <span className="text-wf-xs text-wf-text-secondary">Y-Axis</span>
+              <div className="grid grid-cols-2 gap-1.5 mt-1">
+                <div>
+                  <label className="text-wf-xs text-wf-text-primary">Line</label>
+                  <input
+                    type="color"
+                    value={config.options.scales?.y?.grid?.borderColor || '#666666'}
+                    onChange={(e) => handleAxisColorChange('y', 'border', e.target.value)}
+                    className="wf-color-input w-full h-8"
+                  />
+                </div>
+                <div>
+                  <label className="text-wf-xs text-wf-text-primary">Labels</label>
+                  <input
+                    type="color"
+                    value={config.options.scales?.y?.ticks?.color || '#666666'}
+                    onChange={(e) => handleAxisColorChange('y', 'labels', e.target.value)}
+                    className="wf-color-input w-full h-8"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

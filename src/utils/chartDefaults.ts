@@ -41,12 +41,24 @@ export const getDefaultChartOptions = (): ChartOptions => ({
     y: {
       beginAtZero: true,
       grid: {
-        display: true
+        display: true,
+        color: 'rgba(0, 0, 0, 0.1)',
+        borderColor: '#666666',
+        tickColor: '#666666'
+      },
+      ticks: {
+        color: '#666666'
       }
     },
     x: {
       grid: {
-        display: false
+        display: false,
+        color: 'rgba(0, 0, 0, 0.1)',
+        borderColor: '#666666',
+        tickColor: '#666666'
+      },
+      ticks: {
+        color: '#666666'
       }
     }
   }
