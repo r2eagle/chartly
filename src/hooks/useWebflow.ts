@@ -18,8 +18,8 @@ export const useWebflow = () => {
       containerBuilder.setAttribute('data-chartflow-config', JSON.stringify(config));
       containerBuilder.setAttribute('class', 'chartflow-container');
 
-      // Add inline styles via style attribute for basic layout
-      containerBuilder.setAttribute('style', 'width: 100%; min-height: 400px; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);');
+      // Add minimal inline styles - users can style via Webflow Designer
+      containerBuilder.setAttribute('style', 'width: 100%; min-height: 400px;');
 
       // Create canvas element as a child
       const canvasPreset = webflow.elementPresets.DOM;

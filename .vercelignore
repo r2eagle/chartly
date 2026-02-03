@@ -1,0 +1,36 @@
+# Source files (already bundled)
+src/
+
+# Node modules (installed during build)
+node_modules/
+
+# Build artifacts not needed for deployment
+dist/
+bundle.zip
+
+# Development files
+.git/
+.github/
+scripts/
+
+# Documentation
+SETUP.md
+PUBLISHING.md
+README.md
+chartly.md
+
+# Config files not needed at runtime
+webpack.config.mjs
+tsconfig.json
+tailwind.config.js
+postcss.config.js
+.eslintrc
+.npmignore
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
